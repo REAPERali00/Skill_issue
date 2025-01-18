@@ -19,26 +19,6 @@ export const permissions: GadgetPermissions = {
         session: {
           read: true,
         },
-        todo: {
-          read: {
-            filter: "accessControl/filters/todo/signed-in-read.gelly",
-          },
-          actions: {
-            complete: {
-              filter:
-                "accessControl/filters/todo/signed-in-read.gelly",
-            },
-            create: true,
-            delete: {
-              filter:
-                "accessControl/filters/todo/signed-in-read.gelly",
-            },
-            update: {
-              filter:
-                "accessControl/filters/todo/signed-in-read.gelly",
-            },
-          },
-        },
         user: {
           read: {
             filter: "accessControl/filters/user/tenant.gelly",
