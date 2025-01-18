@@ -36,7 +36,11 @@ const RadarChart = () => {
     },
   };
 
-  return <Radar data={data} options={options} />;
+  return (
+    <div style={{ width: '300px', height: '300px', margin: '0 auto' }}>
+      <Radar data={data} options={options} />
+    </div>
+  );
 };
 
 export default RadarChart;
