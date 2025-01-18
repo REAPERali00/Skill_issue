@@ -99,7 +99,14 @@ const App = () => {
         />
         <Route path="reset-password" element={<ResetPasswordPage />} />
         <Route path="verify-email" element={<VerifyEmailPage />} />
-        <Route path="stat" element={<Stat />} />
+        <Route
+          path="stat"
+          element={
+            <SignedInOrRedirect>
+              <Stat />
+            </SignedInOrRedirect>
+          }
+        />
       </Route>
     )
   );
@@ -152,6 +159,11 @@ const Header = () => {
             Sign up
           </Link>
         </SignedOut>
+        <SignedIn>
+          <Link to="/stat" style={{ color: "black" }}>
+            Stats
+          </Link>
+        </SignedIn>
       </div>
     </div>
   );

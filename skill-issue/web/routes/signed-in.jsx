@@ -41,6 +41,7 @@ export default function () {
         <div className="flex-vertical gap-4px">
           <strong>Actions:</strong>
           <Link to="/change-password">Change password</Link>
+          <Link to="/stat">Stats</Link>
           <a onClick={signOut}>
             Sign Out
           </a>
