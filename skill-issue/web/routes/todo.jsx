@@ -123,6 +123,8 @@ function TodoItem({ todo }) {
           update({
             id: todo.id,
             isCompleted: !todo.isCompleted,
+            skill: todo.skill,
+            score: todo.score,
           });
         }}
       />
