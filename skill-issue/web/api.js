@@ -4,3 +4,4 @@ import { Client } from "@gadget-client/skill-issue";
 
 
 export const api = new Client({ environment: window.gadgetConfig.environment });
+

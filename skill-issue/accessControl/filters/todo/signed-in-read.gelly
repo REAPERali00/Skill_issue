@@ -1,0 +1,4 @@
+filter ($session: Session, $user: User) on Todo [
+  where userId == $user.id
+]
+# structured filters: [{"type":"tenancy_read_filter","field":"user"}]

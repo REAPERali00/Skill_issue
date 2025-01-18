@@ -16,6 +16,25 @@ export const permissions: GadgetPermissions = {
         action: true,
       },
       models: {
+        session: {
+          read: true,
+        },
+        todo: {
+          read: {
+            filter: "accessControl/filters/todo/signed-in-read.gelly",
+          },
+          actions: {
+            create: true,
+            delete: {
+              filter:
+                "accessControl/filters/todo/signed-in-read.gelly",
+            },
+            update: {
+              filter:
+                "accessControl/filters/todo/signed-in-read.gelly",
+            },
+          },
+        },
         user: {
           read: {
             filter: "accessControl/filters/user/tenant.gelly",
@@ -24,9 +43,16 @@ export const permissions: GadgetPermissions = {
             changePassword: {
               filter: "accessControl/filters/user/tenant.gelly",
             },
+            delete: true,
+            resetPassword: true,
+            sendResetPassword: true,
+            sendVerifyEmail: true,
+            signIn: true,
             signOut: {
               filter: "accessControl/filters/user/tenant.gelly",
             },
+            signUp: true,
+            update: true,
           },
         },
         userStat: {
@@ -45,17 +71,38 @@ export const permissions: GadgetPermissions = {
     unauthenticated: {
       storageKey: "unauthenticated",
       models: {
+        session: {
+          read: true,
+        },
         user: {
+          read: true,
           actions: {
+            changePassword: true,
+            delete: true,
             resetPassword: true,
             sendResetPassword: true,
             sendVerifyEmail: true,
             signIn: true,
+            signOut: true,
             signUp: true,
-            verifyEmail: true,
+            update: true,
+          },
+        },
+        userStat: {
+          read: true,
+          actions: {
+            create: true,
+            delete: true,
+            update: true,
           },
         },
       },
+    },
+    "Role A": {
+      storageKey: "AvfVKuL3d6t7",
+    },
+    "Role B": {
+      storageKey: "Oaglv89isLYc",
     },
   },
 };
