@@ -1,0 +1,15 @@
+.mainContainer {
+  text-align: center;
+  background-color: pink;
+}
+
+.title {
+  font-weight: 800;
+  font-family: Arial;
+  font-size: 50px;
+}
+
+.skillText {
+  font-family: Arial;
+  font-size: 20px;
+}

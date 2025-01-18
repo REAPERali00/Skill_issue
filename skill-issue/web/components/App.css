@@ -322,3 +322,25 @@ button {
   justify-content: center;
   height: 100%;
 }
+
+
+
+.stat-display {
+  display: flex;
+  justify-content: center; /* Centers the columns horizontally */
+  align-items: center; /* Centers the columns vertically */
+  height: 100vh; /* Ensures the content is vertically centered within the viewport */
+}
+
+.stat-column {
+  margin: 0 20px; /* Adds space between the columns */
+  text-align: center; /* Centers the text inside the column */
+}
+
+.stat-column h2 {
+  margin-bottom: 10px; /* Adds spacing between the header and the list of skills */
+}
+
+.stat-column p {
+  margin: 5px 0; /* Adds a little spacing between each skill */
+}
