@@ -54,5 +54,10 @@ export const schema: GadgetModel = {
       default: ["unauthenticated"],
       storageKey: "ChDCeSXaQ0qo",
     },
+    todos: {
+      type: "hasMany",
+      children: { model: "todo", belongsToField: "user" },
+      storageKey: "Wnmk6KJFFeHn",
+    },
   },
 };

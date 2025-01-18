@@ -22,6 +22,7 @@ import SignInPage from "../routes/sign-in";
 import Home from "../routes/home";
 import SignUpPage from "../routes/sign-up";
 import Stat from "../routes/stat";
+import Todo from "../routes/todo";
 import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
@@ -107,6 +108,14 @@ const App = () => {
             </SignedInOrRedirect>
           }
         />
+        <Route
+          path="todo"
+          element={
+            <SignedInOrRedirect>
+              <Todo />
+            </SignedInOrRedirect>
+          }
+        />
       </Route>
     )
   );
@@ -162,6 +171,11 @@ const Header = () => {
         <SignedIn>
           <Link to="/stat" style={{ color: "black" }}>
             Stats
+          </Link>
+        </SignedIn>
+        <SignedIn>
+          <Link to="/todo" style={{ color: "black" }}>
+            Todo
           </Link>
         </SignedIn>
       </div>
