@@ -15,7 +15,7 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, 
 
 const RadarChart = () => {
   const data = {
-    labels: ['Speed', 'Strength', 'Agility', 'Endurance', 'Intelligence'],
+    labels: ['Workout', 'Java', 'Singing', 'Python', 'Running'],
     datasets: [
       {
         label: 'Player A',

@@ -27,6 +27,7 @@ import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
 import ForgotPassword from "../routes/forgot-password";
+import Groq from "../routes/groq";
 import "./App.css";
 
 const App = () => {
@@ -116,6 +117,14 @@ const App = () => {
             </SignedInOrRedirect>
           }
         />
+        <Route
+          path="groq"
+          element={
+            <SignedInOrRedirect>
+              <Groq />
+            </SignedInOrRedirect>
+          }
+        />
       </Route>
     )
   );
@@ -176,6 +185,11 @@ const Header = () => {
         <SignedIn>
           <Link to="/todo" style={{ color: "black" }}>
             Todo
+          </Link>
+        </SignedIn>
+        <SignedIn>
+          <Link to="/groq" style={{ color: "black" }}>
+            Groq
           </Link>
         </SignedIn>
       </div>

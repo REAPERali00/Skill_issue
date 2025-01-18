@@ -41,13 +41,21 @@ export default function () {
   return userStat ? (
     <>
       <div>
-        <h2>Level: {userStat.level}</h2>
-        {getSkillsArray(userStat).map((skill) => (
-          <p key={skill.name}>
-            {skill.name}: {skill.value}
-          </p>
-        ))}
+        <div className="holdingBox">
+          <h2>Level: {userStat.level}</h2>
+          {getSkillsArray(userStat).map((skill) => (
+            <p key={skill.name}>
+              {skill.name}: {skill.value}
+            </p>
+          ))}
+        </div>
+  
+        <div>
+          Chart goes here:
+        </div>
+
       </div>
+      
     </>
   ) : (
     <form onSubmit={handleSubmit}>
