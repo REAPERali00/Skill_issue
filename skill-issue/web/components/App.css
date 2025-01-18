@@ -304,7 +304,6 @@ button {
 
 .row1 {
   display: grid;
-  background-color: blue;
   grid-template-columns: 1fr 1fr 1fr;
   padding-left: 100px;
   padding-right: 100px;
@@ -314,7 +313,6 @@ button {
 .col2,
 .col3 {
   text-align: center;
-  background-color: red;
   height: 100px;
   margin: 50px;
 }
@@ -322,6 +320,5 @@ button {
 .row2 {
   text-align: center;
   justify-content: center;
-  background-color: green;
   height: 100%;
 }

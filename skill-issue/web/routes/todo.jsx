@@ -112,7 +112,9 @@ export default function TodoPage() {
 }
 
 function TodoItem({ todo }) {
-  const [{ fetching }, update] = useAction(api.todo.update);
+ 
+  const [{ fetching, error }, complete] = useAction(api.todo.complete);
+   
   
   return (
     <div style={styles.todoItem}>
@@ -121,10 +123,10 @@ function TodoItem({ todo }) {
         checked={todo.isCompleted}
         disabled={fetching}
         onChange={() => {
-          update({
-            id: todo.id,
-            isCompleted: !todo.isCompleted
-          });
+      {error && <div style={{color: "red"}}>{error.message}</div>}
+          complete({
+            id: todo.id
+          }); 
         }}
       />
       <span style={styles.todoText}>

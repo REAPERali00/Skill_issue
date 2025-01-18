@@ -24,6 +24,10 @@ export const permissions: GadgetPermissions = {
             filter: "accessControl/filters/todo/signed-in-read.gelly",
           },
           actions: {
+            complete: {
+              filter:
+                "accessControl/filters/todo/signed-in-read.gelly",
+            },
             create: true,
             delete: {
               filter:
