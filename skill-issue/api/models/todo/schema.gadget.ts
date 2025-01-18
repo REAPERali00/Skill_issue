@@ -19,7 +19,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "OwL0fsYJTYju-score",
     },

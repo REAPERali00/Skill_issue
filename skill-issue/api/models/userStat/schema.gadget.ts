@@ -26,7 +26,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "Z4x_a1qR3tIQ-skillFiveValue",
     },
@@ -40,7 +40,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "Z4x_a1qR3tIQ-skillFourValue",
     },
@@ -54,7 +54,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "Z4x_a1qR3tIQ-skillOneValue",
     },
@@ -68,7 +68,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "Z4x_a1qR3tIQ-skillThreeValue",
     },
@@ -82,7 +82,7 @@ export const schema: GadgetModel = {
       decimals: 0,
       validations: {
         required: true,
-        numberRange: { min: 0, max: 100 },
+        numberRange: { min: 0, max: 1000 },
       },
       storageKey: "Z4x_a1qR3tIQ-skillTwoValue",
     },

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "react-router";
-import { useFindMany, useAction, useUser } from "@gadgetinc/react";
+import { useFindMany, useAction, useUser, useFindFirst } from "@gadgetinc/react";
 import { api } from "../api";
 
 const styles = {
@@ -138,10 +138,30 @@ function TodoItem({ todo }) {
 
 function NewTodoForm({ onComplete }) {
   const user = useUser();
+  const [{ data: userStat, fetching: fetchingStats, error: statsError }] = useFindFirst(api.userStat, {
+    filter: { user: { id: { equals: user.id } } },
+  });
+
   const [taskName, setTaskName] = useState("");
   const [skill, setSkill] = useState("");
   const [score, setScore] = useState("");
   const [{ fetching, error }, create] = useAction(api.todo.create);
+
+  if (fetchingStats) {
+    return (
+      <div style={styles.form}>
+        <div>Loading skills...</div>
+      </div>
+    );
+  }
+
+  if (statsError) {
+    return (
+      <div style={styles.form}>
+        <div style={{ color: "red" }}>Error loading skills: {statsError.message}</div>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -169,14 +189,19 @@ function NewTodoForm({ onComplete }) {
         required
         style={styles.input}
       />
-      <input
-        type="text"
+      <select
         value={skill}
         onChange={(e) => setSkill(e.target.value)}
-        placeholder="Skill"
         required
         style={styles.input}
-      />
+      >
+        <option value="">Select a skill</option>
+        <option value={userStat.skillOne}>{userStat.skillOne}</option>
+        <option value={userStat.skillTwo}>{userStat.skillTwo}</option>
+        <option value={userStat.skillThree}>{userStat.skillThree}</option>
+        <option value={userStat.skillFour}>{userStat.skillFour}</option>
+        <option value={userStat.skillFive}>{userStat.skillFive}</option>
+      </select>
       <input
         type="number"
         value={score}
