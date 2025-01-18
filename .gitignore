@@ -1,0 +1,67 @@
+# Dependencies
+/node_modules
+
+# Build output
+/build
+/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+*.log
+*.pid
+*.pid.lock
+
+# Local environment settings
+.env
+.env.local
+.env.*.local
+
+# Editor settings
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*.swp
+*.swo
+
+# Coverage directory (used by testing frameworks like Jest)
+coverage/
+
+# Parcel cache (if you're using Parcel bundler)
+.cache/
+
+# Storybook files
+.storybook-out/
+
+# Webpack files
+*.webpack
+
+# ESlint cache
+.eslintcache
+
+# TypeScript build outputs
+*.tsbuildinfo
+
+# Other
+public/favicon.ico
+
+# React Native specific (if applicable)
+.expo/
+*.expo-shared/
