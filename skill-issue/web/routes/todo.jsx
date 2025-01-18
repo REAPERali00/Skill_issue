@@ -81,29 +81,28 @@ export default function TodoPage() {
   }
 
   const [{ data: todos, fetching, error }] = useFindMany(api.todo, {
- 
     filter: { user: { id: { equals: user.id } } },
     sort: { createdAt: "Descending" },
   });
 
   if (fetching) return <div style={styles.container}>Loading todos...</div>;
-  if (error) return <div style={styles.container}>Error loading todos: {error.message}</div>;
+  if (error)
+    return (
+      <div style={styles.container}>Error loading todos: {error.message}</div>
+    );
 
   return (
     <div style={styles.container}>
       <div style={styles.todoList}>
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </div>
-      
+
       {showForm ? (
         <NewTodoForm onComplete={() => setShowForm(false)} />
       ) : (
-        <button 
-          onClick={() => setShowForm(true)}
-          style={styles.fab}
-        >
+        <button onClick={() => setShowForm(true)} style={styles.fab}>
           +
         </button>
       )}
@@ -112,10 +111,8 @@ export default function TodoPage() {
 }
 
 function TodoItem({ todo }) {
- 
-  const [{ fetching, error }, complete] = useAction(api.todo.complete);
-   
-  
+  const [{ fetching, error }, update] = useAction(api.todo.update);
+
   return (
     <div style={styles.todoItem}>
       <input
@@ -123,15 +120,16 @@ function TodoItem({ todo }) {
         checked={todo.isCompleted}
         disabled={fetching}
         onChange={() => {
-      {error && <div style={{color: "red"}}>{error.message}</div>}
-          complete({
-            id: todo.id
-          }); 
+          update({
+            id: todo.id,
+            isCompleted: !todo.isCompleted,
+          });
         }}
       />
       <span style={styles.todoText}>
         {todo.taskName} ({todo.skill} - {todo.score})
       </span>
+      {error && <div style={{ color: "red" }}>{error.message}</div>}
     </div>
   );
 }
@@ -150,7 +148,7 @@ function NewTodoForm({ onComplete }) {
         taskName,
         skill,
         score: parseInt(score),
-        user: { _link: user.id }
+        user: { _link: user.id },
       });
       onComplete();
     } catch (err) {
@@ -160,11 +158,11 @@ function NewTodoForm({ onComplete }) {
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
-      {error && <div style={{color: "red"}}>{error.message}</div>}
+      {error && <div style={{ color: "red" }}>{error.message}</div>}
       <input
         type="text"
         value={taskName}
-        onChange={e => setTaskName(e.target.value)}
+        onChange={(e) => setTaskName(e.target.value)}
         placeholder="Task name"
         required
         style={styles.input}
@@ -172,7 +170,7 @@ function NewTodoForm({ onComplete }) {
       <input
         type="text"
         value={skill}
-        onChange={e => setSkill(e.target.value)}
+        onChange={(e) => setSkill(e.target.value)}
         placeholder="Skill"
         required
         style={styles.input}
@@ -180,7 +178,7 @@ function NewTodoForm({ onComplete }) {
       <input
         type="number"
         value={score}
-        onChange={e => setScore(e.target.value)}
+        onChange={(e) => setScore(e.target.value)}
         placeholder="Score (0-100)"
         min="0"
         max="100"

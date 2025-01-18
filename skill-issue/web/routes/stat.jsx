@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFindFirst, useAction, useUser } from "@gadgetinc/react";
 import { getSkillsArray } from "../utils/skillHelpers";
 import { api } from "../api";
+import RadarChart from './radar-chart';
 
 export default function () {
   const [{ data: userStat, fetching, error }] = useFindFirst(api.userStat);
@@ -40,8 +41,7 @@ export default function () {
 
   return userStat ? (
     <>
-      <div>
-        <div className="holdingBox">
+        <div style={{ padding: '20px', textAlign: 'center' }}>
           <h2>Level: {userStat.level}</h2>
           {getSkillsArray(userStat).map((skill) => (
             <p key={skill.name}>
@@ -50,12 +50,9 @@ export default function () {
           ))}
         </div>
   
-        <div>
-          Chart goes here:
-        </div>
-
-      </div>
-      
+        <div style={{ padding: '20px', textAlign: 'center' }}>
+          <RadarChart />
+        </div>      
     </>
   ) : (
     <form onSubmit={handleSubmit}>
