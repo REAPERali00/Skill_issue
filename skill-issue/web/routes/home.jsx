@@ -7,96 +7,21 @@ export default function () {
   const signOut = useSignOut();
 
   return user ? (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        padding: "20px",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          flex: "1",
-          display: "flex",
-          marginBottom: "20px",
-        }}
-      >
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 1 Column 1
+    <div class="holdingBox">
+      <div class="row1">
+        <div class="col1">
+            <p class="colText">colText1</p>
         </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 1 Column 2
+        <div class="col2">
+            <p class="colText">colText2</p>
         </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 1 Column 3
+        <div class="col3">
+            <p class="colText">colText3</p>
         </div>
       </div>
-      <div
-        style={{
-          width: "100%",
-          flex: "1",
-          display: "flex",
-        }}
-      >
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 2 Column 1
-        </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 2 Column 2
-        </div>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          Row 2 Column 3
-        </div>
+
+      <div class="row2">
+        <p class="colText">hexagon</p>
       </div>
     </div>
   ) : null;

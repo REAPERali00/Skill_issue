@@ -11,9 +11,8 @@
 .app-content {
   text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background: radial-gradient(ellipse at center, white 0.5rem, rgb(0, 0, 0, 0) 40rem);
 }
@@ -111,10 +110,8 @@ button {
 }
 
 .main {
-  min-width: 372px;
   display: flex;
   font-family: system-ui;
-  align-items: center;
   flex-direction: column;
   gap: 16px;
   max-height: 100%;
@@ -303,3 +300,32 @@ button {
   padding-bottom:8;
 }
 
+/* New code 2025-01-18 3:52AM - vic */
+/* Changed content in app-content at the top as well */
+
+.holdingBox {
+  display: grid;
+  flex-direction: row;
+  grid-template-column: 1fr 1fr;
+  background-color: aqua;
+  width: 100%;
+  height: 100%;
+}
+
+.row1 {
+  display: grid;
+  background-color: blue;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex-direction: row;
+}
+
+.row2 {
+  background-color: black;
+}
+
+.col1, .col2, .col3 {
+  background-color: red;
+  /* temp values */
+  margin: 50px;
+  height: 100px;
+}
