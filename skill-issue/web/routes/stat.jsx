@@ -62,9 +62,11 @@ export default function () {
   return userStat ? (
     <>
       <div className="stat-display">
-         <div className="stat-column" style={{width: '250px'}}>
+         <div className="stat-column">
             <h2>Level: {currentLevel}</h2>
            <p>XP needed for next level: {pointsNeeded.toFixed(3)}</p>
+ 
+Human: Can you verify the stat.css file has the responsive styles needed? If not, can you add them?
 
               {levels.map((level, index) => (
                 <ProgressBar

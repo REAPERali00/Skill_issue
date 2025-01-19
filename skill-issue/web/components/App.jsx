@@ -23,6 +23,7 @@ import Home from "../routes/home";
 import SignUpPage from "../routes/sign-up";
 import Stat from "../routes/stat";
 import Todo from "../routes/todo";
+import Camera from "../routes/camera";
 import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
@@ -109,6 +110,14 @@ const App = () => {
           element={
             <SignedInOrRedirect>
               <Todo />
+            </SignedInOrRedirect>
+          }
+        />
+        <Route
+          path="camera"
+          element={
+            <SignedInOrRedirect>
+              <Camera />
             </SignedInOrRedirect>
           }
         />

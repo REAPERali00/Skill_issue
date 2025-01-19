@@ -43,6 +43,11 @@ const RadarChart = ({ userStat }) => {
   };
 
   const options = {
+    plugins: {
+      legend: {
+        display: false, // Hide the legend
+      },
+    },
     responsive: true,
     maintainAspectRatio: false,
     scales: {
