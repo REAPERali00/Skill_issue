@@ -6,6 +6,7 @@
   position: fixed;
   z-index: 0;
   background-image: url("https://assets.gadget.dev/assets/default-app-assets/default-background.svg");
+  background-color: rgb(197, 205, 205);
 }
 
 .app-content {
@@ -116,7 +117,6 @@ button {
   grid-template-rows: 1fr 1fr;
   width: 100%;
   height: 100%;
-  background-color: rgb(197, 205, 205);
 }
 
 .header {
@@ -321,4 +321,66 @@ button {
   text-align: center;
   justify-content: center;
   height: 100%;
+}
+
+/* Progress bar container */
+.progress-container {
+  display: flex;
+  justify-content: space-between; /* Distribute steps evenly */
+  align-items: center;
+  width: 100%; /* Full width of the container */
+  height: 30px; /* Height of the steps */
+  margin: 20px 0; /* Add some spacing */
+}
+
+/* Individual step */
+.progress-step {
+  flex: 1; /* Each step takes equal width */
+  height: 100%; /* Match container height */
+  margin: 0 2px; /* Add spacing between steps */
+  background-color: #e0e0e0; /* Default light gray color */
+  border-radius: 2px; /* Slight rounding for a clean look */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* Active step */
+.progress-step.active {
+  background-color: #4caf50; /* Green color for active steps */
+}
+/* General styles for larger screens */
+.stat-display {
+  display: flex;
+  justify-content: center; /* Centers the columns horizontally */
+  align-items: center; /* Centers the columns vertically */
+  height: 100vh; /* Ensures the content is vertically centered within the viewport */
+}
+
+.stat-column {
+  margin: 0 20px; /* Adds space between the columns */
+  text-align: left; /* Aligns text to the left */
+}
+
+.radar-chart {
+  height: 400px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+
+  .app {
+     position: inherit;
+  }
+  
+  .stat-display {
+    flex-direction: column; /* Stacks the columns vertically */
+    justify-content: flex-start; /* Adjusts vertical alignment for better UX */
+    height: auto; /* Allows content to flow naturally */
+    padding: 20px; /* Adds padding around the content */
+  }
+
+  .stat-column {
+    margin: 20px 0; /* Adds spacing between stacked columns */
+    text-align: center; /* Centers text on smaller screens */
+    width: 340px;
+  }
 }

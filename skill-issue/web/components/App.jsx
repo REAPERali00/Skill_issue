@@ -23,11 +23,12 @@ import Home from "../routes/home";
 import SignUpPage from "../routes/sign-up";
 import Stat from "../routes/stat";
 import Todo from "../routes/todo";
+import Camera from "../routes/camera";
 import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
 import ForgotPassword from "../routes/forgot-password";
-import Groq from "../routes/groq";
+import { useSignOut } from "@gadgetinc/react";
 import "./App.css";
 
 const App = () => {
@@ -41,21 +42,16 @@ const App = () => {
         <Route
           index
           element={
-            <>
-              <SignedIn>
-                <Home />
-              </SignedIn>
-              <SignedOut>
-                <Index />
-              </SignedOut>
-            </>
+            <SignedInOrRedirect redirectTo="/stat">
+              <Stat />
+            </SignedInOrRedirect>
           }
         />
         <Route
           path="signed-in"
           element={
             <SignedInOrRedirect>
-              <SignedInPage />
+              <Stat />
             </SignedInOrRedirect>
           }
         />
@@ -117,14 +113,6 @@ const App = () => {
             </SignedInOrRedirect>
           }
         />
-        <Route
-          path="groq"
-          element={
-            <SignedInOrRedirect>
-              <Groq />
-            </SignedInOrRedirect>
-          }
-        />
       </Route>
     )
   );
@@ -158,6 +146,7 @@ const Layout = () => {
 };
 
 const Header = () => {
+  const signOut = useSignOut();
   return (
     <div className="header">
       <a
@@ -188,9 +177,9 @@ const Header = () => {
           </Link>
         </SignedIn>
         <SignedIn>
-          <Link to="/groq" style={{ color: "black" }}>
-            Groq
-          </Link>
+          <a onClick={signOut} style={{ color: "black" }}>
+            Sign Out
+          </a>
         </SignedIn>
       </div>
     </div>

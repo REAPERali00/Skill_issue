@@ -1,7 +1,6 @@
 import { useUser, useSignOut } from "@gadgetinc/react";
 import { api } from "../api";
-import RadarChart from './radar-chart';
-
+import RadarChart from "./radar-chart";
 
 export default function () {
   const user = useUser(api);
@@ -22,10 +21,10 @@ export default function () {
       </div>
 
       <div class="row2">
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Performance Radar Chart</h1>
-        <RadarChart />
-      </div>
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <h1>Performance Radar Chart</h1>
+          <RadarChart />
+        </div>
       </div>
     </div>
   ) : null;

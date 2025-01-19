@@ -1,23 +1,28 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate } from "react-router";
-import { useFindMany, useAction, useUser, useFindFirst } from "@gadgetinc/react";
+import { useFindMany, useAction, useUser } from "@gadgetinc/react";
+import Webcam from "react-webcam"; // Add this for the camera functionality
 import { api } from "../api";
 
 const styles = {
   container: {
-    maxWidth: "800px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
     margin: "0 auto",
     padding: "20px",
   },
   todoList: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
+    gap: "18px",
+    margin: "18px 15px 0px 15px",
   },
   todoItem: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
     padding: "10px",
     backgroundColor: "#f5f5f5",
     borderRadius: "4px",
@@ -25,10 +30,15 @@ const styles = {
   todoText: {
     flex: 1,
   },
-  fab: {
+  fabContainer: {
     position: "fixed",
     bottom: "20px",
     right: "20px",
+    display: "flex",
+    flexDirection: "row",
+    gap: "10px",
+  },
+  fab: {
     width: "50px",
     height: "50px",
     borderRadius: "50%",
@@ -64,10 +74,41 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
   },
+  displayBox: {
+    border: "2px solid white",
+    borderRadius: "10px",
+    backgroundColor: "rgb(200, 200, 200)",
+    width: "90%",
+    marginTop: "5px",
+    height: "80vh",
+    padding: "5px",
+  },
+  cameraContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
+    backgroundColor: "#f9f9f9",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  },
+  cameraButton: {
+    padding: "8px",
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
 };
 
 export default function TodoPage() {
   const [showForm, setShowForm] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const webcamRef = useRef(null); // Reference for the webcam
+  const [capturedImage, setCapturedImage] = useState(null); // State to store captured image
+  const [facingMode, setFacingMode] = useState("user");
   let user;
 
   try {
@@ -91,20 +132,70 @@ export default function TodoPage() {
       <div style={styles.container}>Error loading todos: {error.message}</div>
     );
 
+  const capturePhoto = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
+  };
+
+  const toggleCamera = () => {
+    setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
+  };
+
   return (
     <div style={styles.container}>
-      <div style={styles.todoList}>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
+      <div style={styles.displayBox}>
+        <div style={styles.todoList}>
+          {todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
+        </div>
       </div>
 
-      {showForm ? (
-        <NewTodoForm onComplete={() => setShowForm(false)} />
-      ) : (
+      <div style={styles.fabContainer}>
         <button onClick={() => setShowForm(true)} style={styles.fab}>
           +
         </button>
+        <button
+          onClick={() => setShowCamera((prev) => !prev)}
+          style={styles.fab}
+        >
+          📸
+        </button>
+      </div>
+
+      {showForm && <NewTodoForm onComplete={() => setShowForm(false)} />}
+
+      {showCamera && (
+        <div style={styles.cameraContainer}>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            width={300}
+            videoConstraints={{ facingMode }}
+          />
+          <button onClick={toggleCamera}>
+            Switch to {facingMode === "user" ? "Rear" : "Front"} Camera
+          </button>
+          <button onClick={capturePhoto} style={styles.cameraButton}>
+            Capture Photo
+          </button>
+          {capturedImage && (
+            <div>
+              <img
+                src={capturedImage}
+                alt="Captured"
+                style={{ width: "100%", borderRadius: "8px" }}
+              />
+              <button
+                onClick={() => setCapturedImage(null)}
+                style={styles.cameraButton}
+              >
+                Retake
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -123,8 +214,6 @@ function TodoItem({ todo }) {
           update({
             id: todo.id,
             isCompleted: !todo.isCompleted,
-            skill: todo.skill,
-            score: todo.score,
           });
         }}
       />
@@ -138,38 +227,14 @@ function TodoItem({ todo }) {
 
 function NewTodoForm({ onComplete }) {
   const user = useUser();
-  const [{ data: userStat, fetching: fetchingStats, error: statsError }] = useFindFirst(api.userStat, {
-    filter: { user: { id: { equals: user.id } } },
-  });
-
   const [taskName, setTaskName] = useState("");
-  const [skill, setSkill] = useState("");
-  const [score, setScore] = useState("");
   const [{ fetching, error }, create] = useAction(api.todo.create);
-
-  if (fetchingStats) {
-    return (
-      <div style={styles.form}>
-        <div>Loading skills...</div>
-      </div>
-    );
-  }
-
-  if (statsError) {
-    return (
-      <div style={styles.form}>
-        <div style={{ color: "red" }}>Error loading skills: {statsError.message}</div>
-      </div>
-    );
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await create({
         taskName,
-        skill,
-        score: parseInt(score),
         user: { _link: user.id },
       });
       onComplete();
@@ -186,29 +251,6 @@ function NewTodoForm({ onComplete }) {
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
         placeholder="Task name"
-        required
-        style={styles.input}
-      />
-      <select
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
-        required
-        style={styles.input}
-      >
-        <option value="">Select a skill</option>
-        <option value={userStat.skillOne}>{userStat.skillOne}</option>
-        <option value={userStat.skillTwo}>{userStat.skillTwo}</option>
-        <option value={userStat.skillThree}>{userStat.skillThree}</option>
-        <option value={userStat.skillFour}>{userStat.skillFour}</option>
-        <option value={userStat.skillFive}>{userStat.skillFive}</option>
-      </select>
-      <input
-        type="number"
-        value={score}
-        onChange={(e) => setScore(e.target.value)}
-        placeholder="Score (0-100)"
-        min="0"
-        max="100"
         required
         style={styles.input}
       />
