@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate } from "react-router";
 import { useFindMany, useAction, useUser } from "@gadgetinc/react";
+import Webcam from "react-webcam"; // Add this for the camera functionality
 import { api } from "../api";
 
 const styles = {
@@ -29,10 +30,15 @@ const styles = {
   todoText: {
     flex: 1,
   },
-  fab: {
+  fabContainer: {
     position: "fixed",
     bottom: "20px",
     right: "20px",
+    display: "flex",
+    flexDirection: "row",
+    gap: "10px",
+  },
+  fab: {
     width: "50px",
     height: "50px",
     borderRadius: "50%",
@@ -77,10 +83,31 @@ const styles = {
     height: "80vh",
     padding: "5px",
   },
+  cameraContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
+    backgroundColor: "#f9f9f9",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  },
+  cameraButton: {
+    padding: "8px",
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
 };
 
 export default function TodoPage() {
   const [showForm, setShowForm] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const webcamRef = useRef(null); // Reference for the webcam
+  const [capturedImage, setCapturedImage] = useState(null); // State to store captured image
   let user;
 
   try {
@@ -104,6 +131,11 @@ export default function TodoPage() {
       <div style={styles.container}>Error loading todos: {error.message}</div>
     );
 
+  const capturePhoto = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.displayBox}>
@@ -114,12 +146,47 @@ export default function TodoPage() {
         </div>
       </div>
 
-      {showForm ? (
-        <NewTodoForm onComplete={() => setShowForm(false)} />
-      ) : (
+      <div style={styles.fabContainer}>
         <button onClick={() => setShowForm(true)} style={styles.fab}>
           +
         </button>
+        <button
+          onClick={() => setShowCamera((prev) => !prev)}
+          style={styles.fab}
+        >
+          📸
+        </button>
+      </div>
+
+      {showForm && <NewTodoForm onComplete={() => setShowForm(false)} />}
+
+      {showCamera && (
+        <div style={styles.cameraContainer}>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            width={300}
+          />
+          <button onClick={capturePhoto} style={styles.cameraButton}>
+            Capture Photo
+          </button>
+          {capturedImage && (
+            <div>
+              <img
+                src={capturedImage}
+                alt="Captured"
+                style={{ width: "100%", borderRadius: "8px" }}
+              />
+              <button
+                onClick={() => setCapturedImage(null)}
+                style={styles.cameraButton}
+              >
+                Retake
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -138,14 +205,10 @@ function TodoItem({ todo }) {
           update({
             id: todo.id,
             isCompleted: !todo.isCompleted,
-            skill: todo.skill,
-            score: todo.score,
           });
         }}
       />
-      <span style={styles.todoText}>
-        {todo.taskName} ({todo.skill} - {todo.score})
-      </span>
+      <span style={styles.todoText}>{todo.taskName}</span>
       {error && <div style={{ color: "red" }}>{error.message}</div>}
     </div>
   );
@@ -186,60 +249,3 @@ function NewTodoForm({ onComplete }) {
     </form>
   );
 }
-// function NewTodoForm({ onComplete }) {
-//   const user = useUser();
-//   const [taskName, setTaskName] = useState("");
-//   const [skill, setSkill] = useState("");
-//   const [score, setScore] = useState("");
-//   const [{ fetching, error }, create] = useAction(api.todo.create);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await create({
-//         taskName,
-//         skill,
-//         score: parseInt(score),
-//         user: { _link: user.id },
-//       });
-//       onComplete();
-//     } catch (err) {
-//       console.error("Failed to create todo:", err);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} style={styles.form}>
-//       {error && <div style={{ color: "red" }}>{error.message}</div>}
-//       <input
-//         type="text"
-//         value={taskName}
-//         onChange={(e) => setTaskName(e.target.value)}
-//         placeholder="Task name"
-//         required
-//         style={styles.input}
-//       />
-//       <input
-//         type="text"
-//         value={skill}
-//         onChange={(e) => setSkill(e.target.value)}
-//         placeholder="Skill"
-//         required
-//         style={styles.input}
-//       />
-//       <input
-//         type="number"
-//         value={score}
-//         onChange={(e) => setScore(e.target.value)}
-//         placeholder="Score (0-100)"
-//         min="0"
-//         max="100"
-//         required
-//         style={styles.input}
-//       />
-//       <button type="submit" disabled={fetching} style={styles.button}>
-//         Add Todo
-//       </button>
-//     </form>
-//   );
-// }

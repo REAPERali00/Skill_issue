@@ -113,14 +113,6 @@ const App = () => {
             </SignedInOrRedirect>
           }
         />
-        <Route
-          path="camera"
-          element={
-            <SignedInOrRedirect>
-              <Camera />
-            </SignedInOrRedirect>
-          }
-        />
       </Route>
     )
   );
