@@ -334,7 +334,7 @@ button {
 
 .stat-column {
   margin: 0 20px; /* Adds space between the columns */
-  text-align: center; /* Centers the text inside the column */
+  text-align: left; /* Centers the text inside the column */
 }
 
 .stat-column h2 {

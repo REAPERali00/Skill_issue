@@ -48,7 +48,7 @@ export default function () {
   return userStat ? (
     <>
       <div className="stat-display">
-         <div className="stat-column" style={{width: '200px'}}>
+         <div className="stat-column" style={{width: '250px'}}>
             <h2>Level: {userStat.level}</h2>
 
               {levels.map((level, index) => (
@@ -62,7 +62,7 @@ export default function () {
            
             {getSkillsArray(userStat).map((skill) => (
               <p key={skill.name}>
-                {skill.name}: {skill.value}
+                <b>{skill.name}:</b> Level {Math.floor(skill.value/100)}
               </p>
             ))}
           </div>

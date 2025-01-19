@@ -27,7 +27,7 @@ const RadarChart = ({ userStat }) => {
     ],
     datasets: [
       {
-        label: 'Skills',
+        label: 'Your Scores',
         data: [
           userStat.skillOneValue,
           userStat.skillTwoValue,
