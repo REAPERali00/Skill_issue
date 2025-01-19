@@ -2,7 +2,7 @@ import { assert } from "gadget-server";
 import { groq } from "../services/groq";
  
 export const params = {
-  image: { type: "any" },
+  image: { type: "string" },
   userId: { type: "string" }
 }
 
@@ -48,25 +48,34 @@ export const run = async ({ params, logger, api }) => {
         content: [
           {
             type: "text",
-            text: prompt
+            text: "What's in this image?"
           },
-          {
-            type: "image",
-            image: params.base64Image
+           {
+            type: "image_url",
+            image_url: {
+              url: "https://upload.wikimedia.org/wikipedia/commons/f/f2/LPU-v1-die.jpg"
+            }
           }
         ]
       }
-    ]
+    ],
+    model: "llama-3.2-11b-vision-preview",
+    temperature: 1,
+    max_completion_tokens: 1024,
+    top_p: 1,
+    stream: false,
+    stop: null
   });
- 
-  const tasks = JSON.parse(analysis.choices[0]?.message?.content || "[]");
+
+  //logger.info(analysis, "analysis here!!!!");
+  //const tasks = JSON.parse(analysis.choices[0]?.message?.content || "[]");
  
   // Create todos from the tasks
-  const createdTodos = await Promise.all(
-    tasks.map(task => api.todo.create({
-      ...task,
-      user: { _link: params.userId }
-    }))
-  );
+  // const createdTodos = await Promise.all(
+  //   tasks.map(task => api.todo.create({
+  //     ...task,
+  //     user: { _link: params.userId }
+  //   }))
+  // );
   return createdTodos;
 }

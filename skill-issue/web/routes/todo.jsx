@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Navigate } from "react-router";
-import { useFindMany, useAction, useUser } from "@gadgetinc/react";
+import { useFindMany, useAction, useUser} from "@gadgetinc/react";
 import Webcam from "react-webcam"; // Add this for the camera functionality
 import { api } from "../api";
 
@@ -92,6 +92,10 @@ const styles = {
     padding: "20px",
     borderRadius: "8px",
     boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   },
   cameraButton: {
     padding: "8px",
@@ -110,6 +114,7 @@ export default function TodoPage() {
   const [capturedImage, setCapturedImage] = useState(null); // State to store captured image
   const [facingMode, setFacingMode] = useState("user");
   let user;
+const [{ analyzing, error: analyzeError }, analyzeImage] = useAction(api.todo.analyzeImage);
 
   try {
     user = useUser();
@@ -132,22 +137,29 @@ export default function TodoPage() {
       <div style={styles.container}>Error loading todos: {error.message}</div>
     );
 
-  const capturePhoto = () => {
-    imageSrc = webcamRef.current.getScreenshot();
-    const [{ fetching, error }, create] = useAction(api.todo.analyzeImage);
-
-    try {
-      await create({
-        taskName,
-        user: { _link: user.id },
-      });
-      onComplete();
-    } catch (err) {
-      console.error("Failed to create todo:", err);
-    }
+const capturePhoto = async () => {
+  const imageSrc = webcamRef.current.getScreenshot();
+  if (!imageSrc) return;
+  
+  setCapturedImage(imageSrc);
+  
+  try {
+    // Remove the data URL prefix to get just the base64 string
+    const base64Image = imageSrc.split(',')[1];
     
-    setCapturedImage(imageSrc);
-  };
+    // Call the analyzeImage action with the required parameters
+    await analyzeImage({
+      image: base64Image,
+      userId: user.id
+    });
+    
+    // Close the camera after successful analysis
+    setShowCamera(false);
+  } catch (error) {
+    console.error("Failed to analyze image:", error);
+  }
+};
+
 
   const toggleCamera = () => {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));

@@ -82,6 +82,10 @@
 }
 
 .stat-column.image {
+  display: flex;
+  width: auto;
+  flex: 1;
+  justify-content: center;
   max-height: 600px;
 }
 

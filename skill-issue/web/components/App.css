@@ -353,7 +353,7 @@ button {
   display: flex;
   justify-content: center; /* Centers the columns horizontally */
   align-items: center; /* Centers the columns vertically */
-  height: 100vh; /* Ensures the content is vertically centered within the viewport */
+  height: 87vh; /* Ensures the content is vertically centered within the viewport */
 }
 
 .stat-column {
