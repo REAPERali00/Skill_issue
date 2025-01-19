@@ -75,10 +75,10 @@ const styles = {
     cursor: "pointer",
   },
   displayBox: {
-    border: "10px solid white",
+    border: "2px solid white",
     borderRadius: "30px",
     backgroundColor: "rgb(110, 110, 110)",
-    width: "60%",
+    width: "90%",
     marginTop: "5px",
     height: "80vh",
     padding: "5px",
@@ -217,7 +217,9 @@ function TodoItem({ todo }) {
           });
         }}
       />
-      <span style={styles.todoText}>{todo.taskName}</span>
+      <span style={styles.todoText}>
+        {todo.taskName} ({todo.skill} - {todo.score})
+      </span>
       {error && <div style={{ color: "red" }}>{error.message}</div>}
     </div>
   );
