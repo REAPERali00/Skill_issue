@@ -133,7 +133,7 @@ export default function TodoPage() {
     );
 
   const capturePhoto = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
   };
 
