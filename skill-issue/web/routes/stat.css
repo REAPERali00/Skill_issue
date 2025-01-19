@@ -1,3 +1,5 @@
+/* Create skill profile screen */
+
 .mainContainer {
   text-align: center;
 }
@@ -37,6 +39,7 @@
   padding: 5px;
   box-shadow: 1px 5px 3px rgb(0, 0, 0, 0.05);
   border-radius: 10px;
+  border-style: solid;
 }
 
 .createButton {
@@ -62,4 +65,10 @@
   padding-left: 10px;
   padding-right: 10px;
   color: white;
+}
+
+/* Radar chart screen */
+.stat-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

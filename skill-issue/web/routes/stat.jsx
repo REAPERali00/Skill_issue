@@ -41,15 +41,22 @@ export default function () {
   if (error) return <div>Error loading stats:{error.message}</div>;
   if (creating) return <div>Creating stats...</div>;
 
+
+  const currentLevel = userStat ? Math.floor(
+    (userStat.skillOneValue + userStat.skillTwoValue + 
+     userStat.skillThreeValue + userStat.skillFourValue + 
+     userStat.skillFiveValue) / (5 * 100)
+  ) : 10
+  
   const levels = [
-    { currentLevel: 1, maxLevel: 10, color: '#4caf50' }, // Green for first bar
-  ];
+    { currentLevel: currentLevel, maxLevel: 10, color: '#4caf50' }, // Green for first bar
+  ]; 
  
   return userStat ? (
     <>
       <div className="stat-display">
          <div className="stat-column" style={{width: '250px'}}>
-            <h2>Level: {userStat.level}</h2>
+            <h2>Level: {currentLevel}</h2>
 
               {levels.map((level, index) => (
                 <ProgressBar

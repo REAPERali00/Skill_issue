@@ -71,6 +71,9 @@ export const permissions: GadgetPermissions = {
           },
         },
       },
+      actions: {
+        chat: true,
+      },
     },
     unauthenticated: {
       storageKey: "unauthenticated",
