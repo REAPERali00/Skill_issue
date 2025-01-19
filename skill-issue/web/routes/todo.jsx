@@ -108,6 +108,7 @@ export default function TodoPage() {
   const [showCamera, setShowCamera] = useState(false);
   const webcamRef = useRef(null); // Reference for the webcam
   const [capturedImage, setCapturedImage] = useState(null); // State to store captured image
+  const [facingMode, setFacingMode] = useState("user");
   let user;
 
   try {
@@ -134,6 +135,10 @@ export default function TodoPage() {
   const capturePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
+  };
+
+  const toggleCamera = () => {
+    setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
   };
 
   return (
@@ -167,7 +172,11 @@ export default function TodoPage() {
             ref={webcamRef}
             screenshotFormat="image/png"
             width={300}
+            videoConstraints={{ facingMode }}
           />
+          <button onClick={toggleCamera}>
+            Switch to {facingMode === "user" ? "Rear" : "Front"} Camera
+          </button>
           <button onClick={capturePhoto} style={styles.cameraButton}>
             Capture Photo
           </button>

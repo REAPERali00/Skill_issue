@@ -360,11 +360,16 @@ button {
   text-align: left; /* Aligns text to the left */
 }
 
+.radar-chart {
+  height: 400px;
+}
+
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
+
   .app {
-      position: revert;
-    }
+     position: inherit;
+  }
   
   .stat-display {
     flex-direction: column; /* Stacks the columns vertically */

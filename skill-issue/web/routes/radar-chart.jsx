@@ -57,9 +57,8 @@ const RadarChart = ({ userStat }) => {
     },
   };
   
-
   return (
-    <div style={{ width: '500px', height: '500px', margin: '0 auto' }}>
+    <div className="radar-chart" style={{ margin: '0 auto' }}>
       <Radar data={data} options={options} />
     </div>
   );
