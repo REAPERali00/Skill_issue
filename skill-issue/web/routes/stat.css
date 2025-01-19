@@ -81,8 +81,22 @@
   top: 0px;
 }
 
+.stat-column.image {
+  max-height: 600px;
+}
+
+.character-image {
+  max-width: 30%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
 
 @media (max-width: 768px) {
+
+    .stat-column.image {
+      display: none;
+    }
   .stat-display {
     flex-direction: column; /* Stacks the columns vertically */
     justify-content: flex-start; /* Adjusts vertical alignment for better UX */
@@ -93,9 +107,10 @@
   .stat-column {
     margin: 20px 0; /* Adds spacing between stacked columns */
     text-align: center; /* Centers text on smaller screens */
+    max-height: 400px;
+    padding: 20px 0;
   }
 }
-
 
 .stat-column h2 {
   margin-bottom: 10px; /* Adds spacing between the header and the list of skills */
@@ -104,4 +119,3 @@
 .stat-column p {
   margin: 5px 0; /* Adds a little spacing between each skill */
 }
-

@@ -134,6 +134,18 @@ export default function TodoPage() {
 
   const capturePhoto = () => {
     imageSrc = webcamRef.current.getScreenshot();
+    const [{ fetching, error }, create] = useAction(api.todo.analyzeImage);
+
+    try {
+      await create({
+        taskName,
+        user: { _link: user.id },
+      });
+      onComplete();
+    } catch (err) {
+      console.error("Failed to create todo:", err);
+    }
+    
     setCapturedImage(imageSrc);
   };
 

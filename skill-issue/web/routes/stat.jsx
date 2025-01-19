@@ -83,6 +83,21 @@ export default function () {
          <div className="stat-column">
             <RadarChart userStat={userStat} />
           </div>
+          <div className="stat-column image">
+            <img 
+              className="character-image"
+              src={
+                currentLevel >= 5 ? "/assets/cool.png"
+                : currentLevel < 5 ? "/assets/peasant.png":
+                ""
+              }
+              alt={
+                `Character avatar for level ${currentLevel} - ${
+                  currentLevel >= 9 ? "Master" : currentLevel >= 6 ? "Advanced" : currentLevel >= 3 ? "Intermediate" : "Novice"
+                } tier`
+              }
+            />
+          </div>
        </div>
     </>
   ) : (

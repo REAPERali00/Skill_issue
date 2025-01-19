@@ -341,6 +341,7 @@ button {
   background-color: #e0e0e0; /* Default light gray color */
   border-radius: 2px; /* Slight rounding for a clean look */
   transition: background-color 0.3s ease; /* Smooth color transition */
+  border: 0.5px solid black;
 }
 
 /* Active step */

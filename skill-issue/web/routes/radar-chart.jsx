@@ -53,6 +53,10 @@ const RadarChart = ({ userStat }) => {
     scales: {
       r: {
         beginAtZero: true,
+        grid: {
+          color: 'rgba(0, 0, 0, 0.4)', // Darker grid lines (hexagon lines)
+          lineWidth: 2, // Optional: Make the lines thicker
+        },
       },
     },
   };

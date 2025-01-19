@@ -5,4 +5,6 @@ import { gadget } from "gadget-server/vite";
 export default defineConfig({
   plugins: [gadget(), react()],
   clearScreen: false,
+  publicDir: "public",
+  base: "/"
 });
