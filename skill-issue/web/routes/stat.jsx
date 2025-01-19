@@ -42,13 +42,13 @@ export default function () {
   if (creating) return <div>Creating stats...</div>;
 
 
-  const currentLevel = userStat ? (
+  const currentLevel = userStat ? Math.floor(
     (userStat.skillOneValue + userStat.skillTwoValue + 
      userStat.skillThreeValue + userStat.skillFourValue + 
      userStat.skillFiveValue) / (500)
   ) : 0
 
-  const pointsNeeded = userStat ? 1 - (
+  const pointsNeeded = userStat ? (currentLevel+1) - (
     (userStat.skillOneValue + userStat.skillTwoValue + 
      userStat.skillThreeValue + userStat.skillFourValue + 
      userStat.skillFiveValue) / (500)
@@ -64,7 +64,7 @@ export default function () {
       <div className="stat-display">
          <div className="stat-column" style={{width: '250px'}}>
             <h2>Level: {currentLevel}</h2>
-           <h2>Points needed for next level: {pointsNeeded}</h2>
+           <p>XP needed for next level: {pointsNeeded.toFixed(3)}</p>
 
               {levels.map((level, index) => (
                 <ProgressBar
