@@ -76,8 +76,8 @@ const styles = {
   },
   displayBox: {
     border: "2px solid white",
-    borderRadius: "30px",
-    backgroundColor: "rgb(110, 110, 110)",
+    borderRadius: "10px",
+    backgroundColor: "rgb(200, 200, 200)",
     width: "90%",
     marginTop: "5px",
     height: "80vh",
