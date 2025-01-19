@@ -40,14 +40,9 @@ const App = () => {
         <Route
           index
           element={
-            <>
-              <SignedIn>
-                <Home />
-              </SignedIn>
-              <SignedOut>
-                <Index />
-              </SignedOut>
-            </>
+            <SignedInOrRedirect redirectTo="/stat">
+              <Home />
+            </SignedInOrRedirect>
           }
         />
         <Route

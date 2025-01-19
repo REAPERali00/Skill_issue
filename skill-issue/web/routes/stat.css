@@ -71,8 +71,22 @@
 .stat-display {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .stat-column{
   width: 500px;
+  top: 0px;
 }
+
+
+.stat-column h2 {
+  margin-bottom: 10px; /* Adds spacing between the header and the list of skills */
+}
+
+.stat-column p {
+  margin: 5px 0; /* Adds a little spacing between each skill */
+}
+

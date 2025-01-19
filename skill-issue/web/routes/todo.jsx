@@ -113,7 +113,7 @@ export default function TodoPage() {
           ))}
         </div>
       </div>
-      
+
       {showForm ? (
         <NewTodoForm onComplete={() => setShowForm(false)} />
       ) : (
@@ -124,8 +124,6 @@ export default function TodoPage() {
     </div>
   );
 }
-
-
 
 function TodoItem({ todo }) {
   const [{ fetching, error }, update] = useAction(api.todo.update);
@@ -156,8 +154,6 @@ function TodoItem({ todo }) {
 function NewTodoForm({ onComplete }) {
   const user = useUser();
   const [taskName, setTaskName] = useState("");
-  const [skill, setSkill] = useState("");
-  const [score, setScore] = useState("");
   const [{ fetching, error }, create] = useAction(api.todo.create);
 
   const handleSubmit = async (e) => {
@@ -165,8 +161,6 @@ function NewTodoForm({ onComplete }) {
     try {
       await create({
         taskName,
-        skill,
-        score: parseInt(score),
         user: { _link: user.id },
       });
       onComplete();
@@ -186,27 +180,66 @@ function NewTodoForm({ onComplete }) {
         required
         style={styles.input}
       />
-      <input
-        type="text"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
-        placeholder="Skill"
-        required
-        style={styles.input}
-      />
-      <input
-        type="number"
-        value={score}
-        onChange={(e) => setScore(e.target.value)}
-        placeholder="Score (0-100)"
-        min="0"
-        max="100"
-        required
-        style={styles.input}
-      />
       <button type="submit" disabled={fetching} style={styles.button}>
         Add Todo
       </button>
     </form>
   );
 }
+// function NewTodoForm({ onComplete }) {
+//   const user = useUser();
+//   const [taskName, setTaskName] = useState("");
+//   const [skill, setSkill] = useState("");
+//   const [score, setScore] = useState("");
+//   const [{ fetching, error }, create] = useAction(api.todo.create);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await create({
+//         taskName,
+//         skill,
+//         score: parseInt(score),
+//         user: { _link: user.id },
+//       });
+//       onComplete();
+//     } catch (err) {
+//       console.error("Failed to create todo:", err);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} style={styles.form}>
+//       {error && <div style={{ color: "red" }}>{error.message}</div>}
+//       <input
+//         type="text"
+//         value={taskName}
+//         onChange={(e) => setTaskName(e.target.value)}
+//         placeholder="Task name"
+//         required
+//         style={styles.input}
+//       />
+//       <input
+//         type="text"
+//         value={skill}
+//         onChange={(e) => setSkill(e.target.value)}
+//         placeholder="Skill"
+//         required
+//         style={styles.input}
+//       />
+//       <input
+//         type="number"
+//         value={score}
+//         onChange={(e) => setScore(e.target.value)}
+//         placeholder="Score (0-100)"
+//         min="0"
+//         max="100"
+//         required
+//         style={styles.input}
+//       />
+//       <button type="submit" disabled={fetching} style={styles.button}>
+//         Add Todo
+//       </button>
+//     </form>
+//   );
+// }
