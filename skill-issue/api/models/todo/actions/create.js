@@ -23,13 +23,6 @@ export const run = async ({ params, record, logger, api, connections }) => {
           skillFive: true,
         },
       });
-
-  logger.info("User and user stats found");
-  logger.info(userStat.skillOne);
-  logger.info(userStat.skillTwo);
-  logger.info(userStat.skillThree);
-  logger.info(userStat.skillFour);
-  logger.info(userStat.skillFive);
   
   const chatCompletion = await client.chat.completions.create({
     messages: [
@@ -38,16 +31,17 @@ export const run = async ({ params, record, logger, api, connections }) => {
     model: "gemma2-9b-it",
   });
 
-  logger.info(chatCompletion.choices[0].message.content);
   const response = chatCompletion.choices[0].message.content;
+  
   const [scoreStr, skillStr] = response.split(',').map(str => str.trim());
   const score = parseInt(scoreStr, 10);
+
+  logger.info(`Message here: ${response}`);
+  
 
   record.skill = skillStr;
   record.score = score;
 
-  logger.info(skillStr);
-  logger.info(score);
   logger.info(chatCompletion, "groq hit!");
   await save(record);
   

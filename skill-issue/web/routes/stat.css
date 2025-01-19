@@ -68,12 +68,12 @@
 }
 
 /* Radar chart screen */
+
 .stat-display {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  display: flex;
+  justify-content: center; /* Centers the columns horizontally */
+  align-items: center; /* Centers the columns vertically */
+  height: 89vh; 
 }
 
 .stat-column{

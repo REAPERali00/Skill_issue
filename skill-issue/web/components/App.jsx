@@ -27,6 +27,7 @@ import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
 import ForgotPassword from "../routes/forgot-password";
+import { useSignOut } from "@gadgetinc/react";
 import "./App.css";
 
 const App = () => {
@@ -41,7 +42,7 @@ const App = () => {
           index
           element={
             <SignedInOrRedirect redirectTo="/stat">
-              <Home />
+              <Stat />
             </SignedInOrRedirect>
           }
         />
@@ -49,7 +50,7 @@ const App = () => {
           path="signed-in"
           element={
             <SignedInOrRedirect>
-              <SignedInPage />
+              <Stat />
             </SignedInOrRedirect>
           }
         />
@@ -144,6 +145,7 @@ const Layout = () => {
 };
 
 const Header = () => {
+  const signOut = useSignOut();
   return (
     <div className="header">
       <a
@@ -172,6 +174,11 @@ const Header = () => {
           <Link to="/todo" style={{ color: "black" }}>
             Todo
           </Link>
+        </SignedIn>
+        <SignedIn>
+          <a onClick={signOut} style={{ color: "black" }}>
+            Sign Out
+          </a>
         </SignedIn>
       </div>
     </div>
