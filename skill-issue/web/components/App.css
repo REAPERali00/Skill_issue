@@ -344,3 +344,30 @@ button {
 .stat-column p {
   margin: 5px 0; /* Adds a little spacing between each skill */
 }
+
+
+/* Progress bar container */
+.progress-container {
+  display: flex;
+  justify-content: space-between; /* Distribute steps evenly */
+  align-items: center;
+  width: 100%; /* Full width of the container */
+  height: 30px; /* Height of the steps */
+  margin: 20px 0; /* Add some spacing */
+}
+
+/* Individual step */
+.progress-step {
+  flex: 1; /* Each step takes equal width */
+  height: 100%; /* Match container height */
+  margin: 0 2px; /* Add spacing between steps */
+  background-color: #e0e0e0; /* Default light gray color */
+  border-radius: 2px; /* Slight rounding for a clean look */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* Active step */
+.progress-step.active {
+  background-color: #4caf50; /* Green color for active steps */
+}
+

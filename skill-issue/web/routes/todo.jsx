@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router";
 import { useFindMany, useAction, useUser, useFindFirst } from "@gadgetinc/react";
 import { api } from "../api";
+import { useGroq } from "../hooks/useGroq";
 
 const styles = {
   container: {

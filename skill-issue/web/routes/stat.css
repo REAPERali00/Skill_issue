@@ -1,15 +1,65 @@
 .mainContainer {
   text-align: center;
-  background-color: pink;
 }
 
-.title {
-  font-weight: 800;
+.titleText {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: 900;
   font-family: Arial;
-  font-size: 50px;
+  font-size: 40px;
 }
+
+.helperMessage {
+  padding: 0px 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .helperMessage {
+    padding: 0px 20px; /* Adjust the padding for smaller screens */
+  }
+}
+
 
 .skillText {
   font-family: Arial;
-  font-size: 20px;
+  font-size: 19px;
+  font-weight: 550;
+  padding: 5px 15px;
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: rgb(54, 54, 54);
+  color: white;
+}
+
+.inputField {
+  margin-left: 20px;
+  padding: 5px;
+  box-shadow: 1px 5px 3px rgb(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.createButton {
+  background-color: rgb(23, 58, 146);
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 0.15s;
+  cursor: pointer;
+}
+
+.createButton:hover {
+  background-color: rgb(40, 81, 186);
+  box-shadow: 1px 5px 3px rgb(45, 81, 176, 0.05);
+}
+
+.createText {
+  font-size: 17px;
+  font-weight: 600;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
 }
