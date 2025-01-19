@@ -82,6 +82,21 @@
 }
 
 
+@media (max-width: 768px) {
+  .stat-display {
+    flex-direction: column; /* Stacks the columns vertically */
+    justify-content: flex-start; /* Adjusts vertical alignment for better UX */
+    height: auto; /* Allows content to flow naturally */
+    padding: 20px; /* Adds padding around the content */
+  }
+
+  .stat-column {
+    margin: 20px 0; /* Adds spacing between stacked columns */
+    text-align: center; /* Centers text on smaller screens */
+  }
+}
+
+
 .stat-column h2 {
   margin-bottom: 10px; /* Adds spacing between the header and the list of skills */
 }

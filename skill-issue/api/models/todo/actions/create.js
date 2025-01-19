@@ -32,14 +32,16 @@ export const run = async ({ params, record, logger, api, connections }) => {
   });
 
   const response = chatCompletion.choices[0].message.content;
-  
-  const [scoreStr, skillStr] = response.split(',').map(str => str.trim());
-  const score = parseInt(scoreStr, 10);
-
   logger.info(`Message here: ${response}`);
+
+  const strings = response.split(',').map(str => str.trim());
+  const score = parseInt(strings[0], 10);
+  const skill = strings[1];
+  logger.info(`SKILL TO BE SAVED HERE: ${skill}`);
+  logger.info(`SCORE TO BE SAVED HERE: ${score}`);
   
 
-  record.skill = skillStr;
+  record.skill = skill;
   record.score = score;
 
   logger.info(chatCompletion, "groq hit!");
