@@ -2,13 +2,13 @@ import { assert } from "gadget-server";
 import { groq } from "../services/groq";
  
 export const params = {
-  base64Image: { type: "string" },
+  image: { type: "any" },
   userId: { type: "string" }
 }
 
 export const run = async ({ params, logger, api }) => {
   // Validate inputs
-  assert(params.base64Image, "base64Image is required");
+  assert(params.image, "base64Image is required");
   assert(params.userId, "userId is required");
  
   // Get user's stats to access their skills
