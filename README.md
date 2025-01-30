@@ -1,4 +1,4 @@
-# Skill-Issue:
+# Skill-Issue: 
 ## Level Up Your Life, One Task at a Time
 
 Skill-Issue is a next-generation productivity tool designed to help users overcome their "skill issues" and level up in life. Built around the simplicity of a traditional to-do list, Skill-Issue leverages the power of Groq's advanced artificial intelligence to transform tasks into skill experience points. Users choose five pillars (key focus areas of life), and Skill-Issue intelligently assigns experience points to these pillars based on the tasks completed. 
